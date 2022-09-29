@@ -124,6 +124,7 @@ function addpage(){
         type : "get",
     });
     pageNum+=1;
+    creatSidebarIcon(pageName,pageIcon,pageNum);
 }
 //删除分页
 function pageDelte(){
@@ -134,4 +135,7 @@ function pageDelte(){
         url : "http://localhost:3000/detPage?pageID="+OptPage,
         type : "get",
     });
+}
+function pageDetInfo(){
+    document.getElementById("pageDetInfo").innerHTML=document.getElementById("pageID"+OptPage).getElementsByTagName("button")[0].innerHTML;
 }

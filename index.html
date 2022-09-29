@@ -129,7 +129,7 @@
     <!--右键分组弹窗-->
     <div class="btn-group-vertical" id="pageMenu">
         <button type="button" class="btn btn-light btn-sm btn-outline-secondary"onclick="pageClose()"  data-bs-toggle="modal" data-bs-target="#subIcon">编辑</button>
-        <button type="button" class="btn btn-light btn-sm btn-outline-secondary"onclick="pageDelte()"  data-bs-toggle="modal" data-bs-target="#subIcon">删除</button>
+        <button type="button" class="btn btn-light btn-sm btn-outline-secondary"onclick="pageDetInfo()" data-bs-toggle="modal" data-bs-target="#DetPageModal">删除</button>
     </div>
     <!--侧边栏-->
     <div class="offcanvas offcanvas-start bg-dark" id="Sidebar" data-bs-backdrop="false">
@@ -161,6 +161,17 @@
                     <button type="button" class="btn btn-primary" onclick="addpage()" data-bs-dismiss="modal">添加</button>
                 </div>
             </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+    <!--分组警告模态框-->
+    <div class="modal fade" id="DetPageModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
+        <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="alert alert-info" style="margin: 0%;">确认删除分组:<strong id="pageDetInfo"></strong>?
+                        <button type="button" class="btn btn-default"  data-bs-dismiss="modal">取消</button>
+                        <button type="button" class="btn btn-primary" onclick="pageDelte()" data-bs-dismiss="modal">确认</button> 
+                    </div>
+                </div>
         </div><!-- /.modal -->
     </div>
 </body>
