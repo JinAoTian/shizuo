@@ -1,5 +1,5 @@
 #Sidebar{
-    width: 4.5rem;
+    width: 80px;
     opacity: 0.8;
 }
 #SidebarIcon{
@@ -28,8 +28,12 @@
     font-size: 40px;
     width:100%;
     height: 60px;
-    border-right: none;
-    border-left: none;
-    border-bottom: none;
-    border-color: dimgray;
+    border: none;
+}
+#pageMenu{
+    position:absolute;
+    top: 0px;
+    left: 0px;
+    display: none;
+    z-index:99999;
 }

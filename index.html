@@ -13,13 +13,14 @@
     <link rel="stylesheet" type="text/css" href="./CSS/main.css">
     <link rel="stylesheet" type="text/css" href="./CSS/Sidebar.css">
     <script async src="./JS/showtime.js"></script>
-    <script async src="./JS/main.js"></script>
-    <script async src="./JS/searchEngine.js"></script>
+    <script src="./JS/LifeLine.js"></script>
     <script async src="./Js/cover.js"></script>
+    <script async src="./JS/main.js"></script>
+    <script async src="./JS/Sidebar.js"></script>
+    <script async src="./JS/searchEngine.js"></script>
     <script async src="./JS/mousePlay.js"></script>
     <script async src="./JS/saying.js"></script>
-    <script async src="./JS/Sidebar.js"></script>
-    <script src="./JS/LifeLine.js"></script>
+ 
     <!--bootstrap5-->
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css">
 	<script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.bundle.min.js"></script>
@@ -43,7 +44,7 @@
         <div id="banner">
         </div>
         <div id="SidebarIcon">
-            <button class="fa fa-th-list" data-bs-toggle="offcanvas" data-bs-target="#Sidebar"></button>
+            <button class="fa fa-th-list" data-bs-toggle="offcanvas" data-bs-target="#Sidebar" onclick="SidebarIconSl()"></button>
         </div>
         <!--头部区域，放置时间-->
         <div id="head" >
@@ -125,19 +126,42 @@
     <div class="btn-group-vertical" id="windowMenu">
         <button type="button" class="btn btn-light btn-sm btn-outline-secondary"onclick="iconClose()"  data-bs-toggle="modal" data-bs-target="#subIcon">添加图标</button>
     </div>
+    <!--右键分组弹窗-->
+    <div class="btn-group-vertical" id="pageMenu">
+        <button type="button" class="btn btn-light btn-sm btn-outline-secondary"onclick="pageClose()"  data-bs-toggle="modal" data-bs-target="#subIcon">编辑</button>
+        <button type="button" class="btn btn-light btn-sm btn-outline-secondary"onclick="pageDelte()"  data-bs-toggle="modal" data-bs-target="#subIcon">删除</button>
+    </div>
     <!--侧边栏-->
-    <div class="offcanvas offcanvas-start bg-light" id="Sidebar">
+    <div class="offcanvas offcanvas-start bg-dark" id="Sidebar" data-bs-backdrop="false">
         <div class="offcanvas-header">
-            <button type="button" class="ropdown-toggle rounded-circle fa fa-address-book" data-bs-toggle="dropdown" id="accoutIcon"></button>
+            <button type="button" class="ropdown-toggle rounded-circle fa fa-address-book bg-light " data-bs-toggle="dropdown" id="accoutIcon"></button>
             <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="#">登录</a></li>
             </ul>
         </div>
         <ul class="nav nav-pills flex-column mb-auto" id="SidebarIconList">
             <li class="nav-item">
-                <button class="SidebarIcon fa fa-plus-square-o ">添加</button>
+                <button class="SidebarIcon fa fa-plus-square-o bg-dark text-white" data-bs-toggle="modal" data-bs-target="#addPage" id="addPageIcon" onclick="pageClose()">添加</button>
             </li>
         </ul>
+    </div>
+    <!--添加分组模态框-->
+    <div class="modal fade" id="addPage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">添加分组</h4>
+                    <button type="button" class="fa fa-remove" data-bs-dismiss="modal" aria-hidden="false" id="addClose"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" class="form-control" id="pageName" placeholder="名称">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default"  data-bs-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" onclick="addpage()" data-bs-dismiss="modal">添加</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
     </div>
 </body>
 </html>

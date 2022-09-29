@@ -5,6 +5,7 @@ window.oncontextmenu = function(e){
 window.onclick=function(e){
     document.getElementById('iconMenu').style.display="none";
     document.getElementById('windowMenu').style.display="none";
+    document.getElementById('pageMenu').style.display="none";
 }
 window.onbeforeunload = function(){
     $ .ajax({

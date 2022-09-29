@@ -43,6 +43,24 @@ fs.readFile('./data/userdata.json',function(err,data){
   app.get("/deleteIcon",function(req,res){
       userdata.page[req.query.pageID].iconList.splice(req.query.id,1);
   })
+
+  //添加一个页面
+
+  app.get("/addPage",function(req,res){
+    var pageData = {
+      "pageName":req.query.pageName,
+      "pageIcon":req.query.pageIcon,
+      "iconList":[]
+    }
+    userdata.page.push(pageData);
+    userdata.pageList.push(req.query.pageName);
+  })
+  
+  app.get("/detPage",function(req,res){
+    userdata.page.splice(req.query.pageID,1);
+    userdata.pageList.splice(req.query.pageID,1);
+  })
+
   //关闭网页时保存用户数据
   app.get("/saveData",function(req,res){
     var str =  JSON.stringify(userdata);

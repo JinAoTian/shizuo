@@ -4,10 +4,9 @@ var editID = 0;
 var editTitle ="";
 var editURL ="";
 var editPage ="0";
+var updateIconLock = 0;
 
 
-
-updateIcon(0);//初始化，导入初始的图标
 //添加链接
 function iconSubmit(){
     var iconURL=document.getElementById("iconURL").value;
@@ -42,20 +41,23 @@ function creatIcon(iconImg,iconTitle,iconURL,iconID){
     iconLi.appendChild(iconLiDiv);
     iconLi.appendChild(iconLiP);
     var iconDiv=iconLi.getElementsByClassName("icon_block")[0];
-    iconDiv.onmouseup = function(e){
-        if(e.button == 0){
-            window.open(iconURL,"_blank");
+    iconDiv.addEventListener(
+        'mouseup',function(e){
+            if(e.button == 0){
+                window.open(iconURL,"_blank");
+            }
+            if(e.button == 2){
+                var menu=document.getElementById('iconMenu');
+                menu.style.left=e.clientX+'px';
+                menu.style.top=e.clientY+'px';
+                menu.style.display = "block";
+                editID = iconID;
+                editTitle = iconTitle;
+                editURL = iconURL;
+                e.stopPropagation();
+            }
         }
-        if(e.button == 2){
-            var menu=document.getElementById('iconMenu');
-            menu.style.left=e.clientX+'px';
-            menu.style.top=e.clientY+'px';
-            menu.style.display = "block";
-            editID = iconID;
-            editTitle = iconTitle;
-            editURL = iconURL;
-        }
-    }
+    )
     var addLi = iconUl.lastElementChild;
     iconUl.appendChild(iconLi);
     iconUl.appendChild(addLi);
@@ -64,7 +66,8 @@ function iconEdit(){
     var iconURL=document.getElementById("iconURL2").value;
     var iconTitle=document.getElementById("iconTitle2").value;
     var DIcon = document.getElementById("iconID"+editID);
-    var DImg = DIcon.getElementsByTagName("div")[0].getElementsByTagName("img")[0];
+    var DDiv = document.createElement('div');
+    var DImg = document.createElement('img');
     var DP = DIcon.getElementsByTagName("p")[0];
     if(iconURL==""){iconURL=editURL;}
     if(iconTitle==""){iconTitle=editTitle;}
@@ -72,25 +75,32 @@ function iconEdit(){
     DImg.setAttribute('src',iconImg);
     DImg.setAttribute('alt',iconTitle);
     DP.innerHTML = iconTitle;
-    DIcon.getElementsByTagName("div")[0].onmouseup = function(e){
-        if(e.button == 0){
-            window.open(iconURL,"_blank");
+    DDiv.appendChild(DImg);
+    DDiv.classList.add("icon_block");
+    DDiv.addEventListener(
+        'mouseup',function(e){
+            if(e.button == 0){
+                window.open(iconURL,"_blank");
+            }
+            if(e.button == 2){
+                var menu=document.getElementById('iconMenu');
+                menu.style.left=e.clientX+'px';
+                menu.style.top=e.clientY+'px';
+                menu.style.display = "block";
+                editID = iconID;
+                editTitle = iconTitle;
+                editURL = iconURL;
+                e.stopPropagation();
+            }
         }
-        if(e.button == 2){
-            var menu=document.getElementById('iconMenu');
-            menu.style.left=e.clientX+'px';
-            menu.style.top=e.clientY+'px';
-            menu.style.display = "block";
-            editID = iconID;
-            editTitle = iconTitle;
-            editURL = iconURL;
-        }
-    }
+    )
+    DIcon.replaceChild(DDiv,DIcon.firstChild);
     $.ajax({
         url : "http://localhost:3000/editIcon?iconImg="+iconImg+"&iconTitle="+iconTitle+"&iconURL="+iconURL+"&id="+editID+"&pageID="+editPage,
         type : "get",
     });
 }
+
 function getIconImg(iconURL){
     if(iconURL[0] =="w"){iconURL = "https://"+iconURL;}
     var iconImg = iconURL.split("/"); //以“/”进行分割
@@ -104,11 +114,12 @@ function getIconImg(iconURL){
 // 加载网页时，默认加载图标
 //http://localhost:3000/
 function updateIcon(pageID){
-
+    if(updateIconLock == 1){console.log(1);return;}
+    updateIconLock = 1;
     for(var i=0;i<iconNum;i++){
         iconUl.removeChild(document.getElementById("iconID"+i));
     }
-    editPage = pageID;
+    pageChose(pageID);
     $ .ajax({
         url : "http://localhost:3000/updateIcon?pageID="+pageID,
         dataType : "json",
@@ -120,12 +131,12 @@ function updateIcon(pageID){
                 creatIcon(data[i].iconImg,data[i].iconTitle,data[i].iconURL,i);
             }
             iconNum = data.length;
+            updateIconLock = 0;
         },
         err:function(){
             alert(错误);
         }
         });
-    
 }
 function pushIcon(iconImg,iconTitle,iconURL){
     $ .ajax({
