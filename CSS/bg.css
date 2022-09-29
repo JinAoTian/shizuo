@@ -1,0 +1,15 @@
+#bg{
+    /* display: flex;
+    flex-direction: column; */
+    width: 100%;
+    min-height: 100vh;
+    text-align: center; 
+    background-image: url(https://w.wallhaven.cc/full/rd/wallhaven-rdwjj7.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    overflow:hidden;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    background-position: center 0;
+}

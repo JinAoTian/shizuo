@@ -1,0 +1,35 @@
+#Sidebar{
+    width: 4.5rem;
+    opacity: 0.8;
+}
+#SidebarIcon{
+    position:absolute;
+    top: 10px;
+    left: 10px;
+    border-radius: 0px;
+}
+#SidebarIcon button{
+    background:none;
+    border: none;
+    font-size: 20px;
+    color:seashell;
+    opacity: 0.8;
+}
+#accoutIcon{
+    width: 40px;
+    height: 40px;
+    /* border: none; */
+}
+#SidebarIconList{
+    padding:0px;
+}
+
+.SidebarIcon{
+    font-size: 40px;
+    width:100%;
+    height: 60px;
+    border-right: none;
+    border-left: none;
+    border-bottom: none;
+    border-color: dimgray;
+}

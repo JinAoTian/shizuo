@@ -1,0 +1,33 @@
+.bottom{
+    position: fixed;
+    bottom:0ex;
+    left: 48%;
+}
+/* 背景图片切换 */
+ .cover {
+    display: block;
+    min-height: 100vh;
+    width: 100%;
+    align-items: center;
+    backdrop-filter: blur(0px);
+} 
+.saying{
+    
+    color: rgb(248, 244, 244);
+    font-size: medium;
+    font-family:fantasy;
+    margin-bottom: 5px;
+    align-self: center;
+    width: 100%;
+}
+#sayingBlock{
+    bottom:20px;
+    width: 100%;
+    position:absolute;
+}
+#windowMenu{
+    position:absolute;
+    top: 0px;
+    left: 0px;
+    display: none;
+}

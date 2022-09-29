@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+	<title>试作起始页v0.33</title>
+    <!--本地文件-->
+    <link rel="stylesheet" type="text/css" href="./CSS/bg.css">
+    <link rel="stylesheet" type="text/css" href="./CSS/banner.css">
+    <link rel="stylesheet" type="text/css" href="./CSS/head.css">
+    <link rel="stylesheet" type="text/css" href="./CSS/search.css">
+    <link rel="stylesheet" type="text/css" href="./CSS/other.css">
+    <link rel="stylesheet" type="text/css" href="./CSS/main.css">
+    <link rel="stylesheet" type="text/css" href="./CSS/Sidebar.css">
+    <script async src="./JS/showtime.js"></script>
+    <script async src="./JS/main.js"></script>
+    <script async src="./JS/searchEngine.js"></script>
+    <script async src="./Js/cover.js"></script>
+    <script async src="./JS/mousePlay.js"></script>
+    <script async src="./JS/saying.js"></script>
+    <script async src="./JS/Sidebar.js"></script>
+    <script src="./JS/LifeLine.js"></script>
+    <!--bootstrap5-->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css">
+	<script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.bundle.min.js"></script>
+
+    <!--看板娘-->
+    <script src="https://eqcn.ajz.miesnfu.com/wp-content/plugins/wp-3d-pony/live2dw/lib/L2Dwidget.min.js"></script> 
+    <script src="https://eqcn.ajz.miesnfu.com/wp-content/plugins/wp-3d-pony/live2dw/lib/L2Dwidget.0.min.js"></script>
+    <script async src="./JS/character.js"></script>
+
+    <!--jquery-->
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+
+    <!--fontAwesome-->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+    <!--vue 3-->
+    <script src="https://cdn.staticfile.org/vue/3.2.36/vue.global.min.js"></script>
+</head>
+    <body id="bg">
+    <div class="cover" id="cover" >
+        <!--头部横幅,考虑以后做相应式布局-->
+        <div id="banner">
+        </div>
+        <div id="SidebarIcon">
+            <button class="fa fa-th-list" data-bs-toggle="offcanvas" data-bs-target="#Sidebar"></button>
+        </div>
+        <!--头部区域，放置时间-->
+        <div id="head" >
+            <p id="showTime">{{ FormatTime(Time) }}</p>
+            <p id="showData">{{ FormatData(Data) }}</p>
+        </div>
+        <!--搜索区域，放置搜索框-->
+        <div id="searchBlock">
+            <div id="searchTitle">
+                <select id="searchSel" @change="change" v-model="selected">
+                    <option v-for="option in options" :value="option.value">
+                        {{ option.text }}
+                      </option>
+                </select>
+                <input  id = "searchText" type="text" placeholder="搜索"  @keyup.enter="search" @keyup="update" v-model="searchText"/><!--此处暂时出去毛玻璃效果-->
+                <button id = "SearchBtn" class="fa fa-search"  @click="search"></button>
+            </div>
+            <ul id="SearchList"></ul>
+        </div>
+        <!--主区域，放置快捷方式-->
+        <div id="main_block" >
+            <ul id="iconUl">
+                <li id="addLi">
+                    <div role="button" data-bs-toggle="modal" data-bs-target="#subIcon" id="addIcon" onclick="iconClose()">
+                        <button class="fa fa-plus"></button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <!--底部一言-->
+        <div id="sayingBlock">
+            <p id="sayingLine" class="saying"></p>
+        </div>
+    </div>
+    <!--链接提交模态框-->
+    <div class="modal fade" id="subIcon" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">添加捷径</h4>
+                    <button type="button" class="fa fa-remove" data-bs-dismiss="modal" aria-hidden="false" id="addClose"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" class="form-control" id="iconURL" placeholder="网址">
+                    <input type="text" class="form-control" id="iconTitle" placeholder="名称-留空自动获取(未完成)">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default"  data-bs-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" onclick="iconSubmit()" data-bs-dismiss="modal">添加</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+    <!--修改图标模态框-->
+    <div class="modal fade" id="editIcon" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">修改捷径</h4>
+                    <button type="button" class="fa fa-remove" data-bs-dismiss="modal" aria-hidden="false" id="addClose"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" class="form-control" id="iconURL2" placeholder="">
+                    <input type="text" class="form-control" id="iconTitle2" placeholder="">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default"  data-bs-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" onclick="iconEdit()" data-bs-dismiss="modal">添加</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+    <!--右键图标弹窗-->
+    <div class="btn-group-vertical" id="iconMenu">
+        <button type="button" class="btn btn-light btn-sm btn-outline-secondary"onclick="iconClose2()"  data-bs-toggle="modal" data-bs-target="#editIcon" >编辑</button>
+        <button type="button" class="btn btn-light btn-sm btn-outline-secondary"onclick = "deleteIcon()">删除</button>
+    </div>
+    <!--右键窗口弹窗-->
+    <div class="btn-group-vertical" id="windowMenu">
+        <button type="button" class="btn btn-light btn-sm btn-outline-secondary"onclick="iconClose()"  data-bs-toggle="modal" data-bs-target="#subIcon">添加图标</button>
+    </div>
+    <!--侧边栏-->
+    <div class="offcanvas offcanvas-start bg-light" id="Sidebar">
+        <div class="offcanvas-header">
+            <button type="button" class="ropdown-toggle rounded-circle fa fa-address-book" data-bs-toggle="dropdown" id="accoutIcon"></button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">登录</a></li>
+            </ul>
+        </div>
+        <ul class="nav nav-pills flex-column mb-auto" id="SidebarIconList">
+            <li class="nav-item">
+                <button class="SidebarIcon fa fa-plus-square-o ">添加</button>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>
