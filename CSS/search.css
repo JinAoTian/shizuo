@@ -83,7 +83,7 @@
     color: #000;
     opacity: 1;
 }  
-#searchBlock ul li a{  
+#searchBlock ul li{  
     text-decoration:dashed;  
     color: rgb(240, 240, 240);
 }  
@@ -92,6 +92,7 @@ padding-left: 50px;
 display:block;  
 background:#ccc;  
 color:#fff; 
+cursor: pointer;
 }
 .SearchOpt{
     font-size: 5px;

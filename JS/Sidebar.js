@@ -41,7 +41,7 @@ function creatSidebarIcon(pageName,pageIcon,pageID){
 //初始化
 function SidebarInit(){
     $.ajax({
-        url : "http://localhost:3000/getPageList",
+        url : BackURL+"getPageList",
         type : "get",
         success : function(data) {
             for(var i=0;i<data.length;i++)
@@ -120,7 +120,7 @@ function addpage(){
     var pageName = document.getElementById("pageName").value;
     var pageIcon = "fa-home";
     $ .ajax({
-        url : "http://localhost:3000/addPage?pageName="+pageName+"&pageIcon="+pageIcon,
+        url : BackURL+"addPage?pageName="+pageName+"&pageIcon="+pageIcon,
         type : "get",
     });
     pageNum+=1;
@@ -132,7 +132,7 @@ function pageDelte(){
     console.log(detPage);
     SidebarList.removeChild(detPage);
     $ .ajax({
-        url : "http://localhost:3000/detPage?pageID="+OptPage,
+        url : BackURL+"detPage?pageID="+OptPage,
         type : "get",
     });
 }

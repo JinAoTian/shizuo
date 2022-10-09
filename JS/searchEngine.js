@@ -29,7 +29,10 @@ const search = Vue.createApp({
             var oScript = document.createElement("script");//动态创建script标签
             if(this.searchText != ""){
                 var oLi = document.createElement("li");
-                oLi.innerHTML ="<a target=_blank href=\""+this.fanyiURLs[0]+this.searchText+ "\">译： "+ this.searchText + "</a>";
+                oLi.innerHTML ="译： "+ this.searchText;
+                oLi.onclick = function(){
+                    window.open(this.fanyiURLs[0]+this.searchText,"_blank");
+                }
                 oUl.appendChild(oLi);
             }
             oScript.src = "http://suggestion.baidu.com/su?wd="+this.searchText+"&cb=callback";
@@ -55,7 +58,10 @@ nowURL = "https://www.baidu.com/s?tn=68018901_2_oem_dg&ie=utf-8&wd=";
 function callback(data){
     data.s.forEach(function(value){
         var oLi = document.createElement("li");
-        oLi.innerHTML ="<a target=_blank href=\""+nowURL+ value + "\">"+ value + "</a>";
+        oLi.innerHTML =value;
+        oLi.onclick = function(){
+            window.open(nowURL+ value,"_blank");
+        }
         oLi.className ="searchRes";
         if(document.getElementsByClassName("searchRes").length < 14){oUl.appendChild(oLi);}//这里可以放到以后优化一下
        })

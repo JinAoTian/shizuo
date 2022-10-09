@@ -1,3 +1,6 @@
+var BackURL = "http://localhost:3000/"
+
+
 window.oncontextmenu = function(e){
     //取消默认的浏览器自带右键
     e.preventDefault();
@@ -9,7 +12,7 @@ window.onclick=function(e){
 }
 window.onbeforeunload = function(){
     $ .ajax({
-        url : "http://localhost:3000/saveData",
+        url : BackURL+"saveData",
         type : "get",
         });
 } 

@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width,maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
-	<title>试作起始页v0.33</title>
+	<title>试作起始页v0.52</title>
     <!--本地文件-->
     <link rel="stylesheet" type="text/css" href="./CSS/bg.css">
     <link rel="stylesheet" type="text/css" href="./CSS/banner.css">
@@ -159,6 +159,25 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default"  data-bs-dismiss="modal">关闭</button>
                     <button type="button" class="btn btn-primary" onclick="addpage()" data-bs-dismiss="modal">添加</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+    <!---->
+    <div class="modal fade" id="editIcon" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">修改捷径</h4>
+                    <button type="button" class="fa fa-remove" data-bs-dismiss="modal" aria-hidden="false" id="addClose"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" class="form-control" id="iconURL2" placeholder="">
+                    <input type="text" class="form-control" id="iconTitle2" placeholder="">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default"  data-bs-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" onclick="iconEdit()" data-bs-dismiss="modal">添加</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal -->

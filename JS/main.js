@@ -96,7 +96,7 @@ function iconEdit(){
     )
     DIcon.replaceChild(DDiv,DIcon.firstChild);
     $.ajax({
-        url : "http://localhost:3000/editIcon?iconImg="+iconImg+"&iconTitle="+iconTitle+"&iconURL="+iconURL+"&id="+editID+"&pageID="+editPage,
+        url : BackURL+"editIcon?iconImg="+iconImg+"&iconTitle="+iconTitle+"&iconURL="+iconURL+"&id="+editID+"&pageID="+editPage,
         type : "get",
     });
 }
@@ -121,7 +121,7 @@ function updateIcon(pageID){
     }
     pageChose(pageID);
     $ .ajax({
-        url : "http://localhost:3000/updateIcon?pageID="+pageID,
+        url : BackURL+"updateIcon?pageID="+pageID,
         dataType : "json",
         type : "get",
         success : function(data) {
@@ -140,7 +140,7 @@ function updateIcon(pageID){
 }
 function pushIcon(iconImg,iconTitle,iconURL){
     $ .ajax({
-        url : "http://localhost:3000/pushIcon?iconImg="+iconImg+"&iconTitle="+iconTitle+"&iconURL="+iconURL+"&pageID="+editPage,
+        url : BackURL+"pushIcon?iconImg="+iconImg+"&iconTitle="+iconTitle+"&iconURL="+iconURL+"&pageID="+editPage,
         type : "get",
         });
 }
@@ -148,7 +148,7 @@ function deleteIcon(){
     var DIcon = document.getElementById("iconID"+editID);
     iconUl.removeChild(DIcon);
     $ .ajax({
-        url : "http://localhost:3000/deleteIcon?id="+editID+"&pageID="+editPage,
+        url : BackURL+"deleteIcon?id="+editID+"&pageID="+editPage,
         type : "get",
         });
 }
