@@ -45,7 +45,6 @@ fs.readFile('./data/userdata.json',function(err,data){
   })
 
   //添加一个页面
-
   app.get("/addPage",function(req,res){
     var pageData = {
       "pageName":req.query.pageName,
@@ -55,10 +54,16 @@ fs.readFile('./data/userdata.json',function(err,data){
     userdata.page.push(pageData);
     userdata.pageList.push(req.query.pageName);
   })
-  
+  //删除一个分组
   app.get("/detPage",function(req,res){
     userdata.page.splice(req.query.pageID,1);
     userdata.pageList.splice(req.query.pageID,1);
+  })
+
+  //修改一个分组
+  app.get("/editPage",function(req,res){
+      userdata.page[req.query.pageID].pageName = req.query.pageName;
+      userdata.page[req.query.pageID].pageIcon = req.query.pageIcon;
   })
 
   //关闭网页时保存用户数据

@@ -22,7 +22,8 @@ function iconClose(){
     document.getElementById("iconTitle").value = "";
 }
 function iconClose2(){
-    
+    document.getElementById("iconURL2").value =editURL;
+    document.getElementById("iconTitle2").value =editTitle;
     document.getElementById("iconURL2").setAttribute("placeholder",editURL);
     document.getElementById("iconTitle2").setAttribute("placeholder",editTitle);
 }

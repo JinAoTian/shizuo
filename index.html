@@ -128,7 +128,7 @@
     </div>
     <!--右键分组弹窗-->
     <div class="btn-group-vertical" id="pageMenu">
-        <button type="button" class="btn btn-light btn-sm btn-outline-secondary"onclick="pageClose()"  data-bs-toggle="modal" data-bs-target="#subIcon">编辑</button>
+        <button type="button" class="btn btn-light btn-sm btn-outline-secondary"onclick="pageClose2()"  data-bs-toggle="modal" data-bs-target="#editPage">编辑</button>
         <button type="button" class="btn btn-light btn-sm btn-outline-secondary"onclick="pageDetInfo()" data-bs-toggle="modal" data-bs-target="#DetPageModal">删除</button>
     </div>
     <!--侧边栏-->
@@ -163,21 +163,20 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal -->
     </div>
-    <!---->
-    <div class="modal fade" id="editIcon" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
+    <!--修改分组模态框-->
+    <div class="modal fade" id="editPage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel">修改捷径</h4>
+                    <h4 class="modal-title" id="myModalLabel">修改分组</h4>
                     <button type="button" class="fa fa-remove" data-bs-dismiss="modal" aria-hidden="false" id="addClose"></button>
                 </div>
                 <div class="modal-body">
-                    <input type="text" class="form-control" id="iconURL2" placeholder="">
-                    <input type="text" class="form-control" id="iconTitle2" placeholder="">
+                    <input type="text" class="form-control" id="pageName2" placeholder="">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default"  data-bs-dismiss="modal">关闭</button>
-                    <button type="button" class="btn btn-primary" onclick="iconEdit()" data-bs-dismiss="modal">添加</button>
+                    <button type="button" class="btn btn-primary" onclick="PageEdit()" data-bs-dismiss="modal">修改</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal -->

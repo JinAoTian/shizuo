@@ -45,7 +45,6 @@ const search = Vue.createApp({
     }
 })
 search.mount("#searchBlock");
-
 let searchAPI = [
     "http://suggestion.baidu.com/su?wd=",//百度
     "http://sg1.api.bing.com/qsonhs.aspx?type=cb&cb=callback&q=",//必应
@@ -63,9 +62,7 @@ function callback(data){
             window.open(nowURL+ value,"_blank");
         }
         oLi.className ="searchRes";
-        if(document.getElementsByClassName("searchRes").length < 14){oUl.appendChild(oLi);}//这里可以放到以后优化一下
+        if(document.getElementsByClassName("searchRes").length < 12){oUl.appendChild(oLi);}//这里可以放到以后优化一下
        })
        oUl.style.display = "block";
 }
-
-

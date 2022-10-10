@@ -5,6 +5,8 @@ var pageNum = 0;
 var ISSL = 0;
 var perPage;
 var OptPage;
+var OptPageName;
+var OptPageIcon;
 SidebarInit();
 windowAddMouseWheel();
 //创建一个图标
@@ -31,11 +33,12 @@ function creatSidebarIcon(pageName,pageIcon,pageID){
                 menu.style.top=e.clientY+'px';
                 menu.style.display = "block";
                 OptPage = pageID;
+                OptPageName = pageName;
+                OptPageIcon = pageIcon;
             }
         }
     ) 
-    SidebarList.appendChild(SidebarIcon);
-    SidebarList.appendChild(SidebarAdd);
+    return SidebarIcon;
 }
 
 //初始化
@@ -46,8 +49,9 @@ function SidebarInit(){
         success : function(data) {
             for(var i=0;i<data.length;i++)
             {
-                creatSidebarIcon(data[i].pageName,data[i].pageIcon,i);
+                SidebarList.appendChild(creatSidebarIcon(data[i].pageName,data[i].pageIcon,i));
             }
+            SidebarList.appendChild(SidebarAdd);
             pageNum = data.length;
             perPage = document.getElementById("pageID"+0);
             updateIcon(0);//初始化，导入首页的图标
@@ -124,7 +128,8 @@ function addpage(){
         type : "get",
     });
     pageNum+=1;
-    creatSidebarIcon(pageName,pageIcon,pageNum);
+    SidebarList.appendChild(creatSidebarIcon(pageName,pageIcon,pageNum));
+    SidebarList.appendChild(SidebarAdd);
 }
 //删除分页
 function pageDelte(){
@@ -138,4 +143,21 @@ function pageDelte(){
 }
 function pageDetInfo(){
     document.getElementById("pageDetInfo").innerHTML=document.getElementById("pageID"+OptPage).getElementsByTagName("button")[0].innerHTML;
+}
+function pageClose(){
+    document.getElementById("pageName").value = "";
+}
+function pageClose2(){
+    document.getElementById("pageName2").value =OptPageName;
+    document.getElementById("pageName2").setAttribute("placeholder",OptPageName);
+}
+function PageEdit(){
+    var oriPage = document.getElementById("pageID"+OptPage);
+    var pageName = document.getElementById("pageName2").value;
+    if(pageName == ""){pageName = OptPageName;}
+    SidebarList.replaceChild(creatSidebarIcon(pageName,OptPageIcon,OptPage),oriPage);
+    $ .ajax({
+        url : BackURL+"editPage?pageName="+pageName+"&pageIcon="+OptPageIcon+"&pageID="+OptPage,
+        type : "get",
+        });
 }
